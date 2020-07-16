@@ -18,21 +18,11 @@ class JavaProjectApplicationTests {
 
     @Autowired
     private WorkWithUsers workWithUsers;
-    private UserRepository userRepository;
-
-    private Users newUser(String name, int age, String email) {
-        Users addUser = new Users();
-        addUser.setName(name);
-        addUser.setAge(age);
-        addUser.setEmail(email);
-        workWithUsers.createUser(addUser);
-        return addUser;
-    }
 
     @Test
     @Transactional
     void contextLoads() {
-        Users addUser = newUser("Петров Петр", 25, "petr@petr.ru");
+        Users addUser = workWithUsers.createUser("Петров Петр", 25, "petr@petr.ru");
         Assertions.assertEquals("Петров Петр", addUser.getName());
 
         workWithUsers.createUserFromString("Иванов Иван 19 ivan@ivan.ru");

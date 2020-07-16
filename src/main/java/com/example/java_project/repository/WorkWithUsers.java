@@ -16,18 +16,18 @@ public class WorkWithUsers {
         this.testRepository = testRepository;
     }
 
-    public void createUser(Users user){
-        Users save = testRepository.save(user);
-    }
-
-
     public Users createUserFromString(String str){
         String[] mainStr = str.split("\\s");
+        Users newUser = createUser(mainStr[0] + " " + mainStr[1], new Integer(mainStr[2]), mainStr[3]);
+        return newUser;
+    }
+
+    public Users createUser(String name, int age, String email) {
         Users addUser = new Users();
-        addUser.setName(mainStr[0] + " " + mainStr[1]);
-        addUser.setAge(new Integer(mainStr[2]));
-        addUser.setEmail(mainStr[3]);
-        createUser(addUser);
+        addUser.setName(name);
+        addUser.setAge(age);
+        addUser.setEmail(email);
+        Users save = testRepository.save(addUser);
         return addUser;
     }
 
